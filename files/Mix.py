@@ -3,14 +3,14 @@
 # Time       : 2020-09-26
 # File Name  : FtoA_CHN.py
 # Develop Tool : Python
-import sys
+import sys, os
 import webbrowser
 import random
 import time
 import base64
 
 print('欢迎来到Front To ASCII!')
-print('版本号:11.0     语言:CHN')
+print('版本号:12.0-DEV     语言:CHN')
 print('键入 help 以获取命令帮助.')
 
 #主程序w
@@ -45,6 +45,7 @@ while True:
         print('exit:退出该程序.')
         print('search:使用百度搜索输入的内容.')
         print('google:使用谷歌搜索输入的内容.')
+        print('adb:adb工具集')
 
     elif Close == 'search':
         st = input('请输入你要搜索的信息(百度)\n')
@@ -91,6 +92,21 @@ while True:
 
             else:
                 break
+            
+    elif Close == 'adb':
+        file_dir = os.path.abspath(__file__)[0:-6]
+        check_device = os.popen('"' + file_dir + '"' + "/adb/adb devices", "r")
+        terminal_output = check_device.read()
+        print(terminal_output)
+        
+        if 'List of devices attached' in terminal_output:
+            print('设备未连接！')
+            
+        elif 'device' in terminal_output:
+            print('设备在线')
+            
+        elif 'offline' in terminal_output:
+            print('设备已离线！')
 
 
 
@@ -122,7 +138,7 @@ while True:
                     print("space.bilibili.com/352127718")
                     print("代码优化:灰尘墨言")
                     print("space.bilibili.com/351565200")
-                    print("版本号:v11CHN 2020/11/08")
+                    print("版本号:v12-DEV CHN 2023/02/25")
 
                 else:
                     break
